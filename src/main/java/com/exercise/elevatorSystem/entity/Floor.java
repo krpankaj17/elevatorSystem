@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table
+@Table(name = "floor")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class Floor {
     @Id
     private Integer id;

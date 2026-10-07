@@ -7,22 +7,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.HashSet;
 
 @Entity
 @Data
-@Table
+@Table(name = "elevator")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Elevator implements ElevatorFactory {
     @Id
-    private Long id;
+    private Integer id;
 
     private String name;
     @ManyToOne
     @JoinColumn(name = "floor_id")
     private Floor floor;
     private Direction movingDirection;
+    private Float currentWeight;
 
 
 
@@ -35,6 +37,20 @@ public class Elevator implements ElevatorFactory {
     public Direction getDirection() {
         return movingDirection;
     }
+    @Override
+    public  Integer getId(){
+        return id;
+    }
+    @Override
+    public Float getCurrentWeight(){
+        return currentWeight;
+    }
+    @Transient
+    public Integer upPriority = -1;
+    @Transient
+   public Integer downPriority = -1;
+    @Transient
+    public HashSet<Integer> requestedFloor = new HashSet<>();
 
 
 }
